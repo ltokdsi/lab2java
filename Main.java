@@ -119,7 +119,8 @@ public class Main {
     // Метод для чтения строк
     private static String getString(Scanner sc, String prompt) {
         System.out.print(prompt);
-        return sc.nextLine().trim();
+        String input = sc.nextLine().trim();
+        return input.isEmpty() ? null : input;
     }
 
     // Безопасный ввод целых чисел
@@ -134,7 +135,7 @@ public class Main {
             }
         }
     }
-    
+
     private static double getValidDouble(Scanner sc, String prompt) {
         while (true) {
             System.out.print(prompt);
