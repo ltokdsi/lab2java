@@ -3,13 +3,13 @@ public class Person {
     private int height;
     private Person father;
 
-    // 2.2 Человек с именем
+    // Конструктор для создания человека с именем и ростом
     public Person(Name name, int height) {
         this.name = name;
         this.height = height;
     }
 
-    // 2.3 Человек с родителем
+    // Конструктор для создания человека с именем, ростом и отцом
     public Person(Name name, int height, Person father) {
         this.name = name;
         this.height = height;
@@ -20,22 +20,36 @@ public class Person {
         return name;
     }
 
-    @Override
-    public String toString() {
+    public String getEffectiveSurname() {
         String s = name.getSurname();
-        String f = name.getFirstName();
-        String p = name.getPatronymic();
+        if ((s == null || s.trim().isEmpty()) && father != null) {
+            s = father.getEffectiveSurname();
+        }
+        return s;
+    }
 
-        if (father != null) {
-            if ((s == null || s.trim().isEmpty()) && father.getName().getSurname() != null) {
-                s = father.getName().getSurname();
-            }
-            if ((p == null || p.trim().isEmpty()) && father.getName().getFirstName() != null) {
-                p = father.getName().getFirstName() + "ович";
+    public String getEffectiveFirstName() {
+        return name.getFirstName();
+    }
+
+    public String getEffectivePatronymic() {
+        String p = name.getPatronymic();
+        if ((p == null || p.trim().isEmpty()) && father != null) {
+            String fatherName = father.getEffectiveFirstName();
+            if (fatherName != null && !fatherName.trim().isEmpty()) {
+                p = fatherName + "ович";
             }
         }
+        return p;
+    }
+
+    @Override
+    public String toString() {
+        String s = getEffectiveSurname();
+        String f = getEffectiveFirstName();
+        String p = getEffectivePatronymic();
 
         Name effectiveName = new Name(s, f, p);
         return effectiveName.toString() + ", рост: " + height;
-        }
     }
+}
