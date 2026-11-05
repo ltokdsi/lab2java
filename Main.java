@@ -48,7 +48,7 @@ public class Main {
         System.out.println("Результат: " + p.toString());
     }
 
-    // --- Метод для Задачи 2.3 ---
+    //  Метод для Задачи 2.3 
     private static void interactiveFamily(Scanner scanner) {
         System.out.println("\nСоздание Первого человека");
         String s1 = getString(scanner, "Фамилия: ");
@@ -78,7 +78,7 @@ public class Main {
     }
 
     private static void interactivePolyline(Scanner scanner) {
-        System.out.println("\n--- Создание Ломаной ---");
+        System.out.println("\n Создание Ломаной ");
         int count = -1;
         while (count < 0) {
             count = getValidInt(scanner, "Сколько точек будет в начальной ломаной? (0 и более): ");
